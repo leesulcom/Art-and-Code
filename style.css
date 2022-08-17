@@ -10,7 +10,7 @@ body {
   font-family: sans-serif;
 }
 
-.image-contatiner {
+.image-containter {
   display: flex;
   height: 100%;
   width: 100%;
@@ -24,5 +24,4 @@ body {
   max-height: 100%;
   display: block;
   margin: auto;
-  background: red;
 }
