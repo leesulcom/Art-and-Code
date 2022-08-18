@@ -124,8 +124,9 @@ function drawCanvas() {
 }
 
 function getOffset(layer) {
-  var touch_offset_x = pointer.x * layer.z_index;
-  var touch_offset_y = pointer.y * layer.z_index;
+  var touch_multiplier = 0.3;
+  var touch_offset_x = pointer.x * layer.z_index * touch_multiplier;
+  var touch_offset_y = pointer.y * layer.z_index * touch_multiplier;
 
   var offset = {
     x: touch_offset_x,
@@ -182,3 +183,50 @@ function pointerMove(event) {
     pointer.y = current_y - pointer_initial.y;
   }
 }
+
+canvas.addEventListener("touchmove", function (event) {
+  event.preventDefault();
+});
+
+canvas.addEventListener("mousemove", function (event) {
+  event.preventDefault();
+});
+
+window.addEventListener("touchend", function (event) {
+  endGesture();
+});
+
+window.addEventListener("mouseup", function (event) {
+  endGesture();
+});
+
+function endGesture() {
+  moving = false;
+
+  pointer.x = 0;
+  pointer.y = 0;
+}
+
+// 모션 컨트롤
+
+// 모션 기반 시차를 위한 변수 초기화
+var motion_initial = {
+  x: null,
+  y: null,
+};
+
+var motion = {
+  x: 0,
+  y: 0,
+};
+
+// gyroscope 이벤트
+window.addEventListener("deviceorientation", function (event) {
+  // 처음 실행이라면
+  if (!motion_initial.x && !motion_initial.y) {
+    motion_initial.x = event.bata;
+    motion_initial.y = event.gamma;
+  }
+
+  //
+});
